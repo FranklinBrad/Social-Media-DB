@@ -2,18 +2,18 @@ const { User, thought, Thought } = require("../models");
 
 const thoughtController =  {
   // Get all thoughts
-  async getthoughts(req, res) {
+  async getThoughts(req, res) {
     try {
-      const thoughts = await thought.find();
+      const thoughts = await Thought.find();
       res.json(thoughts);
     } catch (err) {
       res.status(500).json(err);
     }
   },
   // Get a thought
-  async getSinglethought(req, res) {
+  async getSingleThought(req, res) {
     try {
-      const thought = await thought.findOne({
+      const thought = await Thought.findOne({
         _id: req.params.thoughtId,
       }).select("-__v");
       if (!thought) {
@@ -26,9 +26,9 @@ const thoughtController =  {
     }
   },
   // Create a thought
-  async createthought(req, res) {
+  async createThought(req, res) {
     try {
-      const thought = await thought.create(req.body)
+      const thought = await Thought.create(req.body)
       const userData = await User.findOneAndUpdate(
         { _id: body.userId },
         { $push: { thoughts: thought._id } },
@@ -42,9 +42,9 @@ const thoughtController =  {
     }
   },
   // Delete a thought
-  async deletethought(req, res) {
+  async deleteThought(req, res) {
     try {
-      const thought = await thought.findOneAndDelete({
+      const thought = await Thought.findOneAndDelete({
         _id: req.params.thoughtId,
       });
 
@@ -56,9 +56,9 @@ const thoughtController =  {
     }
   },
   // Update a thought
-  async updatethought(req, res) {
+  async updateThought(req, res) {
     try {
-      const thought = await thought.findOneAndUpdate(
+      const thought = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
         { $set: req.body },
         { runValidators: true, new: true }
@@ -88,7 +88,7 @@ const thoughtController =  {
       return res.status(500).json(err);
     }
   },
-  async deletethought(req, res) {
+  async deleteReaction(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate(
         { _id: body.thoughtId },

@@ -1,65 +1,23 @@
 const router = require('express').Router();
-const User = require('../../db/users');
+const {
+   getUsers,
+   getSingleUser,
+   createUser,
+   deleteUser,
+   updateUser,
+   addFriend,
+   removeFriend
 
-router.get('/', async (req, res) => {
-   try{
-    const payload = await User.findAll();
-    res.status(201).json({status: ('succes'), payload})
-   } catch (err){
-    res.status(401).json({status: ('error'), payload: err.message})
+} = require('../../controllers/userController')
 
-   }
-} )
+router.route('/').get(getUsers).post(createUser);
 
-router.get('/:id', async (req, res) => {
-    try{
-     const payload = await User.findAll(req.params.id);
-     res.status(201).json({status: ('succes'), payload})
-    } catch (err){
-     res.status(401).json({status: ('error'), payload: err.message})
- 
-    }
- } )
+router.route('/:id').get(getSingleUser).delete(deleteUser).put(updateUser);
 
- router.post('/', async (req, res) => {
-    try{
-     const payload = await User.create(req.body);
-     res.status(201).json({status: ('succes'), payload})
-    } catch (err){
-     res.status(401).json({status: ('error'), payload: err.message})
- 
-    }
- } )
+router.route('/:userId/friends').post(addFriend);
 
- router.put('/:id', async (req, res) => {
-    try{
-     const payload = await User.update(
-        req.body, {
-          where: {
-           id: req.params.id
-          }
-        }
-     );
-     res.status(201).json({status: ('succes'), payload})
-    } catch (err){
-     res.status(401).json({status: ('error'), payload: err.message})
- 
-    }
- } )
 
- router.delete('/;id', async (req, res) => {
-    try{
-     const payload = await User.destroy({
-        where: {
-            id:req.params.id
+router.route('/:userId/friends/:friendsId').delete(removeFriend);
 
-        }
-    });
-     res.status(201).json({status: ('succes'), payload})
-    } catch (err){
-     res.status(401).json({status: ('error'), payload: err.message})
- 
-    }
- } )
+module.exports = router;
 
- modual.exports = router
