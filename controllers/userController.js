@@ -2,6 +2,7 @@ const { ObjectId } = require('mongoose').Types;
 const { User, Thought } = require('../models');
 
 
+
 const userController = {
   // Get all users
   async getUsers(req, res) {
@@ -16,7 +17,7 @@ const userController = {
   // Get a single user
   async getSingleUser(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.userId })
+      const user = await User.findOne({ _id: req.params.id })
       .populate({
         path: "thoughts",
         select: "-__v",
@@ -47,7 +48,7 @@ const userController = {
   // Delete a user
   async deleteUser(req, res) {
     try {
-      const user = await User.findOneAndRemove({ _id: req.params.userId });
+      const user = await User.findOneAndDelete({ _id: req.params.id });
 
       if (!user) {
         return res.status(404).json({ message: 'No such user exists' });
@@ -61,7 +62,7 @@ const userController = {
   async updateUser(req, res) {
     try {
       const user = await User.findOneAndUpdate(
-        { _id: req.params.userId },
+        { _id: req.params.id },
         { $set: req.body },
         { runValidators: true, new: true }
       );
@@ -83,15 +84,15 @@ const userController = {
 
     try {
       const user = await User.findOneAndUpdate(
-        { _id: req.params.userId },
-        { $addToSet: { friends: req.body } },
+        { _id: req.params.id },
+        { $addToSet: { friends: req.params.friendsId } },
         { runValidators: true, new: true }
       );
 
       if (!user) {
         return res
           .status(404)
-          .json({ message: 'No user found with that ID :(' });
+          .json({ message: 'No user found with this ID' });
       }
 
       res.json(user);
@@ -103,7 +104,7 @@ const userController = {
   async removeFriend(req, res) {
     try {
       const user = await User.findOneAndUpdate(
-        { _id: req.params.userId },
+        { _id: req.params.id },
         { $pull: { friend: { friendId: req.params.friendId } } },
         { runValidators: true, new: true }
       );
