@@ -27,7 +27,11 @@
 
   ## walkthrought video
 
-  *how to start the server
+  *how to start the 
+
+https://github.com/FranklinBrad/hw-18-noSQL/assets/144159410/6880af91-ee9d-4068-9742-d3e230e01299
+
+server
 
   *how to use the routes
 
