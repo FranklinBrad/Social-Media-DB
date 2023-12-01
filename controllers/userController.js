@@ -17,17 +17,10 @@ const userController = {
   // Get a single user
   async getSingleUser(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.id })
-      .populate({
-        path: "thoughts",
-        select: "-__v",
-      })
-      .populate({
-        path: "friends",
-        select: "-__v",
-      })
-      .select("-__v")
- 
+      const user = await User.findOne({ _id: req.params.userId })
+      .populate("thoughts")
+      .populate("friends")
+      .select("-__v");
       if (!user) {
         return res.status(404).json({ message: 'No user with that ID' })
       }
@@ -66,6 +59,7 @@ const userController = {
         { $set: req.body },
         { runValidators: true, new: true }
       );
+      
 
       if (!user) {
         res.status(404).json({ message: 'No user with this id!' });
@@ -79,20 +73,20 @@ const userController = {
 
   // Add an friend to a user
   async addFriend(req, res) {
-    console.log('You are adding a new friend');
-    console.log(req.body);
+    console.log(req.params);
 
     try {
       const user = await User.findOneAndUpdate(
-        { _id: req.params.id },
-        { $addToSet: { friends: req.params.friendsId } },
-        { runValidators: true, new: true }
+        { _id: req.params.userId },
+        { $push: { friends: req.params.friendsId } },
+        { runValidators: true, new: true },
+        // console.log(friendsId)
       );
-
+      console.log(user)
       if (!user) {
         return res
           .status(404)
-          .json({ message: 'No user found with this ID' });
+          .json({ message: 'There is no user with this ID' });
       }
 
       res.json(user);
@@ -104,8 +98,8 @@ const userController = {
   async removeFriend(req, res) {
     try {
       const user = await User.findOneAndUpdate(
-        { _id: req.params.id },
-        { $pull: { friend: { friendId: req.params.friendId } } },
+        { _id: req.params.userId },
+        { $pull: { friends: req.params.friendsId } },
         { runValidators: true, new: true }
       );
 

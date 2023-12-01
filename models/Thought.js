@@ -1,33 +1,35 @@
 const { Schema, model, Types } = require("mongoose");
 const validator = require("validator");
-
-const reactionSchema = new Schema({
-  reactionId: {
-    type: Schema.Types.ObjectId,
-    default: () => new Types.ObjectId(),
+// creats the schema for reaction
+const reactionSchema = new Schema(
+  {
+    reactionId: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId(),
+    },
+    reactionBody: {
+      type: String,
+      required: true,
+      maxlength: 280,
+      minlength: 1,
+    },
+    userName: {
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
   },
-  reactionBody: {
-    type: String,
-    required: true,
-    maxlength: 280,
-    minlength: 1,
-  },
-  userName: {
-    type: String,
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-
-},
-{toJSON: {
-  getters: true,
-},
-id: false,}
+  {
+    toJSON: {
+      getters: true,
+    },
+    id: false,
+  }
 );
-
+// creats the model for thoughts
 const thoughtSchema = new Schema(
   {
     thoughtText: {
@@ -54,7 +56,7 @@ const thoughtSchema = new Schema(
     id: false,
   }
 );
-
+// creats the virtual for reaction count
 thoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
