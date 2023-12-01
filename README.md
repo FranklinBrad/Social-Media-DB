@@ -1,18 +1,5 @@
 # noSQL social media app
  
-  ## Table of contents
-
- - [License](#License)
- - [Description](#Description)
- - [Installation](#Installation)
- - [Usage](#Usage)
- - [Questions](#Questions)
-
- 
-  ## License
-
-  (https://img.shields.io/badge/License-MIT-yellow.svg)..https://opensource.org/licenses/IPL-1.0
-
   ## Description
   
   with this app you can creat a user, add friends, post your thoughts, and give reactions to peoples thoughts.
@@ -27,13 +14,17 @@
 
   ## walkthrought video
 
-  *how to start the 
+  *how to start the server
 
 https://github.com/FranklinBrad/hw-18-noSQL/assets/144159410/6880af91-ee9d-4068-9742-d3e230e01299
 
-server
+
 
   *how to use the routes
+
+  ## sources
+
+  I used some boilerplate code given to my class from my teacher. I also used some code snipets from past classwork.
 
   ## Questions
 
