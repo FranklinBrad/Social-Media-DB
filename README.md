@@ -21,7 +21,7 @@ https://github.com/FranklinBrad/hw-18-noSQL/assets/144159410/6880af91-ee9d-4068-
 
 
   *how to use the routes
-
+https://youtu.be/mjRT068fBb8
   ## sources
 
   I used some boilerplate code given to my class from my teacher. I also used some code snipets from past classwork.
