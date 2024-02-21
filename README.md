@@ -2,7 +2,7 @@
  
   ## Description
   
-  with this app you can creat a user, add friends, post your thoughts, and give reactions to peoples thoughts.
+  Do you need a database to handle the back end of your social media app? with this database you can creat a user, add friends, post your thoughts, and give reactions to peoples thoughts.
  
   ## Installation
  
@@ -22,9 +22,7 @@ https://github.com/FranklinBrad/hw-18-noSQL/assets/144159410/6880af91-ee9d-4068-
 
   *how to use the routes
 https://youtu.be/mjRT068fBb8
-  ## sources
 
-  I used some boilerplate code given to my class from my teacher. I also used some code snipets from past classwork.
 
   ## Questions
 
